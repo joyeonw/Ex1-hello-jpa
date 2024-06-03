@@ -54,25 +54,23 @@ public class JpaMain {
         	
 //            tx.commit();
         try {
-        	Member member1 = new Member();
-        	member1.setUsername("A");
-
-        	Member member2 = new Member();
-        	member2.setUsername("B");
-
-        	Member member3 = new Member();
-        	member3.setUsername("C");        	
         	
-        	System.out.println("===========================");
-        	em.persist(member1); // 1, ,51
-        	em.persist(member2);// 
-        	em.persist(member3);
+        	// 저장
+        	Team team = new Team();
+        	team.setName("TeamB");
+//        	team.getMembers().add(member);
+        	em.persist(team);
         	
-        	System.err.println("member1 = " + member1.getId());
-        	System.err.println("member2 = " + member2.getId());
-        	System.err.println("member3 = " + member3.getId());
         	
-        	System.out.println("===========================");
+        	Member member = new Member();
+        	member.setUsername("member2");
+        	member.setTeam(team);
+        	em.persist(member);
+ 
+        	
+        	em.flush();
+        	em.clear();
+        	
         	tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
